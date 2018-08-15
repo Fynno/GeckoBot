@@ -166,7 +166,7 @@ ptrn_v3_0 = HUI.generate_pattern(.63, 0.56, 0.99, 0.99, 0.55, 0.73, 0.0, 0.0)
 ptrn_v3_pres = 1
 
 
-PATTERN = [[0.0, 0.8, 0.9, 0.0, 0.25, 0.8, False, True, True, False, 5.0],
+PATTERN = [[0.0, 0.84, 0.9, 0.0, 0.25, 0.8, False, True, True, False, 5.0],
            [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, True, True, True, 2.0],
            [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, False, False, True, 1.0],
            [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, True, False, False, True, 5.0],
