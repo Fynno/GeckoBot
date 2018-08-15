@@ -228,10 +228,10 @@ class HUIThread(threading.Thread):
                 self.last_process_time = time.time()
 
     def checkiffixed (startvec,endvec):
-        g = [0,0,1];                                                                                    "Calibrate by using by using the sensor output on a flat surface"
+        g = [0,0,1];                                                                                  
         delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
         if delta < 30:
-            self.ptrn_idx += 1                                                                          "Check surface angle, if below this value skip testmove"
+            self.ptrn_idx += 1                                                                          
         else:
             safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
             if safety <= 1 and safety >= -1:
