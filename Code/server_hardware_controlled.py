@@ -165,12 +165,21 @@ ptrn_v2_6 = HUI.generate_pattern(.77, 0.99, 0.97, 0.93, 0.70, 0.71, 0.0, 0.0)
 ptrn_v3_0 = HUI.generate_pattern(.63, 0.56, 0.99, 0.99, 0.55, 0.73, 0.0, 0.0)
 ptrn_v3_pres = 1
 
+
+PATTERN = [[0.0, 0.8, 0.9, 0.0, 0.25, 0.8, False, True, True, False, 5.0],
+           [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, True, True, True, 2.0],
+           [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, False, False, True, 1.0],
+           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, True, False, False, True, 5.0],
+           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, True, True, True, True, 2.0],
+           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, False, True, True, False, 1.0]]
+
+
 # MAX_PRESSURE = 0.85    # [bar] v2.2
 # MAX_PRESSURE = 0.93    # [bar] v2.3
 # MAX_PRESSURE = 0.85      # [bar] v2.4
 
 MAX_PRESSURE = ptrn_v3_pres
-DEFAULT_PATTERN = ptrn_v3_0      # default pattern
+DEFAULT_PATTERN = PATTERN      # default pattern
 
 MAX_CTROUT = 0.50     # [10V]
 TSAMPLING = 0.001     # [sec]
@@ -199,10 +208,10 @@ def init_hardware():
     # mplx address for IMU is 0x71
     IMU = []
     sets = [{'name': '0', 'id': 0},
-            {'name': '1', 'id': 1},
+#            {'name': '1', 'id': 1},
             {'name': '2', 'id': 2},
             {'name': '3', 'id': 3},
-            {'name': '4', 'id': 4},
+#            {'name': '4', 'id': 4},
             {'name': '5', 'id': 5}]
     try:
         for s in sets:
@@ -563,6 +572,8 @@ def user_reference(cargo):
     while cargo.state == 'USER_REFERENCE':
         # read
         cargo = read_sens(cargo)
+        if cargo.IMU:
+            cargo = read_imu(cargo)
         # write
         cargo = set_ref(cargo)
         set_dvalve(cargo)
