@@ -166,12 +166,20 @@ ptrn_v3_0 = HUI.generate_pattern(.63, 0.56, 0.99, 0.99, 0.55, 0.73, 0.0, 0.0)
 ptrn_v3_pres = 1
 
 
-PATTERN = [[0.0, 0.84, 0.9, 0.0, 0.25, 0.8, False, True, True, False, 5.0],
-           [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, True, True, True, 2.0],
-           [0.0, 0.8, 0.9, 0.0, 0.25, 0.8, True, False, False, True, 1.0],
-           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, True, False, False, True, 5.0],
-           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, True, True, True, True, 2.0],
-           [0.8, 0.0, 0.0, 0.99, 0.8, 0.3, False, True, True, False, 1.0]]
+PATTERN = [[0.0, 0.74, 0.9, 0.0, 0.0, 0.8, False, True, True, False, 5.0],          "Move"
+           [0.0, 0.74, 0.9, 0.0, 0.0, 0.8, False, True, True, True, 2.0],           "Fixation RF"
+           [0.0, 0.4, 0.9, 0.0, 0.0, 0.0, False, True, True, True, 2.0],            "Testmove RF"
+           [0.0, 0.74, 0.9, 0.0, 0.0, 0.8, True, True, True, True, 2.0],            "Fixation FF"
+           [0.8, 0.74, 0.9, 0.0, 0.0, 0.8, True, True, True, True, 2.0],            "Testmove FF"
+           [0.0, 0.74, 0.9, 0.0, 0.0, 0.8, True, False, False, True, 0.4],          "Defix"
+           [0.8, 0.0, 0.0, 0.9, 0.8, 0.0, True, False, False, True, 5.0],           "Move"
+           [0.4, 0.0, 0.0, 0.9, 0.8, 0.0, True, False, True, True, 2.0],            "Fixation RF"
+           [0.8, 0.0, 0.0, 0.9, 0.0, 0.0, True, False, True, True, 2.0],            "Testmove RF"
+           [0.8, 0.0, 0.0, 0.9, 0.8, 0.0, True, True, True, True, 2.0],             "Fixation FF"
+           [0.8, 0.74, 0.0, 0.9, 0.8, 0.0, True, True, True, True, 2.0],            "Testmove FF" 
+           [0.8, 0.0, 0.0, 0.9, 0.8, 0.0, False, True, True, False, 2.0]]           "Defix"
+           
+         
 
 
 # MAX_PRESSURE = 0.85    # [bar] v2.2

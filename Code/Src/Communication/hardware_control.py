@@ -13,6 +13,9 @@ import time
 import sys
 import Adafruit_BBIO.GPIO as GPIO
 import Adafruit_BBIO.ADC as ADC
+import math
+import numpy as np
+from numpy import linalg as LA
 
 from termcolor import colored
 from Src.Management import reference as ref
@@ -80,6 +83,7 @@ class HUIThread(threading.Thread):
         self.last_process_time = time.time()
         self.process_time = 0
         self.state = cargo.state
+        self.startvec = []
 
         self.rootLogger.info('Initialize HUI Thread ...')
         ADC.setup()
@@ -203,8 +207,37 @@ class HUIThread(threading.Thread):
         if self.cargo.wcomm.confirm:
             self.cargo.wcomm.is_active = True
             if self.last_process_time + self.process_time < time.time():
+                if self.ptrn_idx = 1:
+                    self.startvec = cargo.rec_IMU["0"]
+                elif self.ptrn_idx = 3:
+                    self.startvec = cargo.rec_IMU["2"]
+                elif self.ptrn_idx = 6:
+                    self.startvec = cargo.reg_IMU["3"]
+                elif self.ptrn_idx = 8:
+                    self.startvec = cargo.reg_IMU["5"]
+                elif self.ptrn_idx =2:
+                    self.checkiffixed (self.startvec, cargo.rec_IMU["0"])
+                elif self.ptrn_idx =4:
+                    self.checkiffixed (self.startvec, cargo.rec_IMU["2"])
+                elif self.ptrn_idx =7:
+                    self.checkiffixed (self.startvec, cargo.rec_IMU["3"])
+                elif self.ptrn_idx =9:
+                    self.checkiffixed (self.startvec, cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
+
+    def checkiffixed (startvec,endvec):
+        g = [0,0,1];                                                                                    "Calibrate by using by using the sensor output on a flat surface"
+        delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
+        if delta < 30:
+            self.ptrn_idx += 1                                                                          "Check surface angle, if below this value skip testmove"
+        else:
+            safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
+            if safety <= 1 and safety >= -1:
+                difangle = math.acos(safety)*57.2958
+                if difangle > (1.01*delta+24.5):
+                    self.ptrn_idx -= 2
+
 
     def generate_pattern_ref(self):
         pattern = self.cargo.wcomm.pattern
