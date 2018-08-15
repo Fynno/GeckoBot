@@ -227,7 +227,7 @@ class HUIThread(threading.Thread):
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
 
-    def checkiffixed (startvec, endvec):
+    def checkiffixed (self, startvec, endvec):
         g = [0,0,1];                                                                                  
         delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
         if delta < 30:
