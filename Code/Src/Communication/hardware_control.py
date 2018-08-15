@@ -215,7 +215,7 @@ class HUIThread(threading.Thread):
                 elif idx == 6:
                     self.startvec = cargo.reg_IMU["3"]
                 elif idx == 8:
-                    self.startvec = cargo.reg_IMU["5"]
+                    self.startvec = cargo.rec_IMU["5"]
                 elif idx ==2:
                     self.checkiffixed (self.startvec, cargo.rec_IMU["0"])
                 elif idx ==4:
