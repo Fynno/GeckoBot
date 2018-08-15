@@ -207,27 +207,27 @@ class HUIThread(threading.Thread):
         if self.cargo.wcomm.confirm:
             self.cargo.wcomm.is_active = True
             if self.last_process_time + self.process_time < time.time():
-                idx == self.ptrn_idx
+                idx = self.ptrn_idx
                 if idx == 1:
-                    self.startvec = cargo.rec_IMU["0"]
+                    self.startvec = self.cargo.rec_IMU["0"]
                 elif idx == 3:
-                    self.startvec = cargo.rec_IMU["2"]
+                    self.startvec = self.cargo.rec_IMU["2"]
                 elif idx == 6:
-                    self.startvec = cargo.reg_IMU["3"]
+                    self.startvec = self.cargo.reg_IMU["3"]
                 elif idx == 8:
-                    self.startvec = cargo.rec_IMU["5"]
+                    self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==2:
-                    self.checkiffixed (self.startvec, cargo.rec_IMU["0"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
                 elif idx ==4:
-                    self.checkiffixed (self.startvec, cargo.rec_IMU["2"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==7:
-                    self.checkiffixed (self.startvec, cargo.rec_IMU["3"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
                 elif idx ==9:
-                    self.checkiffixed (self.startvec, cargo.rec_IMU["5"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
 
-    def checkiffixed (self,startvec,endvec):
+    def checkiffixed (self, startvec, endvec):
         g = [0,0,1];                                                                                  
         delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
         if delta < 30:
