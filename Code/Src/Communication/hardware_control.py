@@ -213,7 +213,7 @@ class HUIThread(threading.Thread):
                 elif idx == 3:
                     self.startvec = self.cargo.rec_IMU["2"]
                 elif idx == 7:
-                    self.startvec = self.cargo.reg_IMU["3"]
+                    self.startvec = self.cargo.reg_IMU["4"]
                 elif idx == 9:
                     self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==2:
@@ -221,7 +221,7 @@ class HUIThread(threading.Thread):
                 elif idx ==4:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==8:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["4"])
                 elif idx ==10:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
