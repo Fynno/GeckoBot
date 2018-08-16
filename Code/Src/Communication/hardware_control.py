@@ -210,18 +210,18 @@ class HUIThread(threading.Thread):
                 idx = self.ptrn_idx
                 if idx == 1:
                     self.startvec = self.cargo.rec_IMU["0"]
-                elif idx == 3:
+                elif idx ==3:
                     self.startvec = self.cargo.rec_IMU["2"]
-                elif idx == 7:
-                    self.startvec = self.cargo.reg_IMU["2"]
-                elif idx == 9:
+                elif idx ==7:
+                    self.startvec = self.cargo.rec_IMU["3"]
+                elif idx ==9:
                     self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==2:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
                 elif idx ==4:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==8:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
                 elif idx ==10:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
