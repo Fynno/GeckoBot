@@ -222,7 +222,7 @@ class HUIThread(threading.Thread):
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==80:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
-                elif idx ==100:
+                elif idx ==10:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
