@@ -212,7 +212,7 @@ class HUIThread(threading.Thread):
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx == 30:
                     self.startvec = self.cargo.rec_IMU["2"]
-                elif idx == 60:
+                elif idx == 6:
                     self.startvec = self.cargo.reg_IMU["3"]
                 elif idx == 8:
                     self.startvec = self.cargo.rec_IMU["5"]
