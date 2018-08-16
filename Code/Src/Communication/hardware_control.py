@@ -212,7 +212,7 @@ class HUIThread(threading.Thread):
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx == 3:
                     self.startvec = self.cargo.rec_IMU["2"]
-                elif idx == 70:
+                elif idx == 7:
                     self.startvec = self.cargo.reg_IMU["3"]
                 elif idx == 9:
                     self.startvec = self.cargo.rec_IMU["5"]
@@ -220,7 +220,7 @@ class HUIThread(threading.Thread):
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
                 elif idx ==4:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
-                elif idx ==80:
+                elif idx ==8:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
                 elif idx ==10:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
