@@ -208,7 +208,7 @@ class HUIThread(threading.Thread):
             self.cargo.wcomm.is_active = True
             if self.last_process_time + self.process_time < time.time():
                 idx = self.ptrn_idx
-                if idx == 100:
+                if idx == 1:
                     self.rootLogger.info('Fail 1')
                     self.startvec = self.cargo.rec_IMU["1"]
                 elif idx ==30:
