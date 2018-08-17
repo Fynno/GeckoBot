@@ -19,6 +19,7 @@ from numpy import linalg as LA
 
 from termcolor import colored
 from Src.Management import reference as ref
+from Src.Math import IMUcalc
 
 TSamplingUI = .1
 p7_ptrn = 0.0
@@ -79,7 +80,7 @@ class HUIThread(threading.Thread):
         self.mode2 = False
         self.refzero = False
         self.rootLogger = rootLogger
-        self.ptrn_idx = 0
+        self.ptrn_idx = 11
         self.last_process_time = time.time()
         self.process_time = 0
         self.state = cargo.state
@@ -210,38 +211,45 @@ class HUIThread(threading.Thread):
                 idx = self.ptrn_idx
                 g = [0,0,1];                                                                                  
                 delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["0"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["0"])))*57.2958    
-                print 'delta:', delta
-                if delta > 30 and idx in [1,3,7,9]:
+                print('delta:', delta)
+                if delta < 30 and idx in [1,3,7,9]:
                     self.ptrn_idx += 1
                     self.rootLogger.info('Test not necessary. Continue walking') 
                 elif idx == 1:
-                    self.startvec = self.cargo.rec_IMU["0"]
+                    self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==3:
-                    self.startvec = self.cargo.rec_IMU["2"]
+                    self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==7:
                     self.startvec = self.cargo.rec_IMU["3"]
                 elif idx ==9:
-                    self.startvec = self.cargo.rec_IMU["5"]
+                    self.startvec = self.cargo.rec_IMU["2"]
                 elif idx ==2: 
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"], delta)
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"], delta)
                 elif idx ==4:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"], delta)
+	            # print('\nstartvec : ', self.startvec)
+		    # print('endvec :   ', self.cargo.rec_IMU['0'], '\n')
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"], delta)
                 elif idx ==8:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"], delta)
                 elif idx ==10:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"], delta)
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"], delta)
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
 
     def checkiffixed (self, startvec, endvec, delta):
-   
+
         safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
         if safety <= 1 and safety >= -1:
-            difangle = math.acos(safety)*57.2958
-            if difangle > (5*delta+15):
+	    difangle = IMUcalc.calc_angle(startvec, endvec)
+            difangle2 = math.acos(safety)*57.2958
+		
+            if abs(difangle) > (5):
                 self.rootLogger.info('Unfixed foot identified')
+		self.ptrn_idx -=2
             else:
                 self.rootLogger.info('Feet are fixed, continue walking')
+	print ('difangle: ',difangle)
+	print ('difangle2: ',difangle2)
 
     def generate_pattern_ref(self):
         pattern = self.cargo.wcomm.pattern
