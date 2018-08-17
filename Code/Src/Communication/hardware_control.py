@@ -210,7 +210,7 @@ class HUIThread(threading.Thread):
                 idx = self.ptrn_idx
                 if idx == 1:
                     self.rootLogger.info('Fail 1')
-                    self.startvec = self.cargo.rec_IMU["1"]
+                    self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==30:
                     self.rootLogger.info('Fail 2')
                     self.startvec = self.cargo.rec_IMU["2"]
