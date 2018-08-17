@@ -209,28 +209,20 @@ class HUIThread(threading.Thread):
             if self.last_process_time + self.process_time < time.time():
                 idx = self.ptrn_idx
                 if idx == 1:
-                    self.rootLogger.info('Fail 1')
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==3:
-                    self.rootLogger.info('Fail 2')
                     self.startvec = self.cargo.rec_IMU["2"]
                 elif idx ==7:
-                    self.rootLogger.info('Fail 3')
                     self.startvec = self.cargo.rec_IMU["3"]
                 elif idx ==9:
-                    self.rootLogger.info('Fail 4')
                     self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==2: 
-                    self.rootLogger.info('Fail 5')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
                 elif idx ==4:
-                    self.rootLogger.info('Fail 6')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==8:
-                    self.rootLogger.info('Fail 7')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
                 elif idx ==10:
-                    self.rootLogger.info('Fail 8')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
@@ -240,14 +232,16 @@ class HUIThread(threading.Thread):
         delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
         if delta < 30:
             self.ptrn_idx += 1 
-            self.rootLogger.info('Test not necessary. Continue walking')                                                                         
+            self.rootLogger.info('Test not necessary. Continue walking')                                                                                     
         else:
             safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
             if safety <= 1 and safety >= -1:
                 difangle = math.acos(safety)*57.2958
                 if difangle > (1.01*delta+24.5):
                     self.ptrn_idx -= 2
-
+                    self.rootLogger.info('Unfixed foot identified')
+                else:
+                    self.rootLogger.info('Feet are fixed, continue walking')
 
     def generate_pattern_ref(self):
         pattern = self.cargo.wcomm.pattern
