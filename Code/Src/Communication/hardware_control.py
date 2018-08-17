@@ -208,7 +208,13 @@ class HUIThread(threading.Thread):
             self.cargo.wcomm.is_active = True
             if self.last_process_time + self.process_time < time.time():
                 idx = self.ptrn_idx
-                if idx == 1:
+                g = [0,0,1];                                                                                  
+                delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["0"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["0"])))*57.2958    
+                print 'delta:', delta
+                if delta > 30 and idx in [1,3,7,9]:
+                    self.ptrn_idx += 1
+                    self.rootLogger.info('Test not necessary. Continue walking') 
+                elif idx == 1:
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==3:
                     self.startvec = self.cargo.rec_IMU["2"]
@@ -217,30 +223,25 @@ class HUIThread(threading.Thread):
                 elif idx ==9:
                     self.startvec = self.cargo.rec_IMU["5"]
                 elif idx ==2: 
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"], delta)
                 elif idx ==4:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"], delta)
                 elif idx ==8:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"], delta)
                 elif idx ==10:
-                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
+                    self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"], delta)
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
 
-    def checkiffixed (self, startvec, endvec):
-        g = [0,0,1];                                                                                  
-        delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
-        if delta < 30:
-            self.ptrn_idx += 1 
-            self.rootLogger.info('Test not necessary. Continue walking')                                                                                     
-        else:
-            safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
-            if safety <= 1 and safety >= -1:
-                difangle = math.acos(safety)*57.2958
-                if difangle > (5*delta+15):
-                    self.rootLogger.info('Unfixed foot identified')
-                else:
-                    self.rootLogger.info('Feet are fixed, continue walking')
+    def checkiffixed (self, startvec, endvec, delta):
+   
+        safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
+        if safety <= 1 and safety >= -1:
+            difangle = math.acos(safety)*57.2958
+            if difangle > (5*delta+15):
+                self.rootLogger.info('Unfixed foot identified')
+            else:
+                self.rootLogger.info('Feet are fixed, continue walking')
 
     def generate_pattern_ref(self):
         pattern = self.cargo.wcomm.pattern
