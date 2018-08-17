@@ -208,9 +208,9 @@ class HUIThread(threading.Thread):
             self.cargo.wcomm.is_active = True
             if self.last_process_time + self.process_time < time.time():
                 idx = self.ptrn_idx
-                if idx == 100:
+                if idx == 1:
                     self.startvec = self.cargo.rec_IMU["0"]
-                elif idx ==30:
+                elif idx ==3:
                     self.startvec = self.cargo.rec_IMU["2"]
                 elif idx ==70:
                     self.startvec = self.cargo.rec_IMU["3"]
