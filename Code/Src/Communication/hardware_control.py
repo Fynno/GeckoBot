@@ -231,7 +231,8 @@ class HUIThread(threading.Thread):
         g = [0,0,1];                                                                                  
         delta = 90 - math.asin((np.dot(startvec,g))/(LA.norm(g)*LA.norm(startvec)))*57.2958             
         if delta < 30:
-            self.ptrn_idx += 1                                                                          
+            self.ptrn_idx += 1 
+            self.rootLogger.info('Test not necessary. Continue walking')                                                                         
         else:
             safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
             if safety <= 1 and safety >= -1:
