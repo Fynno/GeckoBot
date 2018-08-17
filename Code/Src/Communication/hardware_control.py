@@ -216,13 +216,13 @@ class HUIThread(threading.Thread):
                     self.startvec = self.cargo.rec_IMU["3"]
                 elif idx ==90:
                     self.startvec = self.cargo.rec_IMU["5"]
-                elif idx ==2: 
+                elif idx ==20: 
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
                 elif idx ==40:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
                 elif idx ==80:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
-                elif idx ==100:
+                elif idx ==10:
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
                 self.last_process_time = time.time()
