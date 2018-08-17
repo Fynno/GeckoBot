@@ -237,7 +237,7 @@ class HUIThread(threading.Thread):
             safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
             if safety <= 1 and safety >= -1:
                 difangle = math.acos(safety)*57.2958
-                if difangle > (8*delta+15):
+                if difangle > (5*delta+15):
                     self.rootLogger.info('Unfixed foot identified')
                 else:
                     self.rootLogger.info('Feet are fixed, continue walking')
