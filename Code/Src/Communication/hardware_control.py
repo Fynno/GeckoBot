@@ -211,25 +211,25 @@ class HUIThread(threading.Thread):
                 if idx == 1:
                     self.rootLogger.info('Fail 1')
                     self.startvec = self.cargo.rec_IMU["0"]
-                elif idx ==30:
+                elif idx ==3:
                     self.rootLogger.info('Fail 2')
                     self.startvec = self.cargo.rec_IMU["2"]
-                elif idx ==70:
+                elif idx ==7:
                     self.rootLogger.info('Fail 3')
                     self.startvec = self.cargo.rec_IMU["3"]
-                elif idx ==90:
+                elif idx ==9:
                     self.rootLogger.info('Fail 4')
                     self.startvec = self.cargo.rec_IMU["5"]
-                elif idx ==20: 
+                elif idx ==2: 
                     self.rootLogger.info('Fail 5')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["0"])
-                elif idx ==40:
+                elif idx ==4:
                     self.rootLogger.info('Fail 6')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["2"])
-                elif idx ==80:
+                elif idx ==8:
                     self.rootLogger.info('Fail 7')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["3"])
-                elif idx ==100:
+                elif idx ==10:
                     self.rootLogger.info('Fail 8')
                     self.checkiffixed (self.startvec, self.cargo.rec_IMU["5"])
                 self.process_time = self.generate_pattern_ref()
