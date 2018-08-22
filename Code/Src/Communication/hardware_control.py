@@ -210,7 +210,7 @@ class HUIThread(threading.Thread):
             if self.last_process_time + self.process_time < time.time():
                 idx = self.ptrn_idx
                 g = [0,0,1];                                                                                  
-                delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["0"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["0"])))*57.2958    
+                delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["5"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["5"])))*57.2958    
                 print('delta:', delta)
                 if delta < 30 and idx in [1,3,7,9]:
                     self.ptrn_idx += 1
