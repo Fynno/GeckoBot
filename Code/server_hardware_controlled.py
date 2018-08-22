@@ -166,19 +166,25 @@ ptrn_v3_0 = HUI.generate_pattern(.63, 0.56, 0.99, 0.99, 0.55, 0.73, 0.0, 0.0)
 ptrn_v3_pres = 1
 
 
-PATTERN = [[0.0, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, False, True, True, False, 5.0],            #0
-           [0.0, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, False, True, True, True, 1.0],             #1
-           [0.0, 0.4, 1, 0.0, 0.0, 0.0, 0.0, 0.0, False, True, True, True, 0.3],              #2  
-           [0.0, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, True, True, True, True, 1.0],              #3
-           [0.8, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, True, True, True, True, 0.3],              #4
-           [0.0, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, True, False, False, True, 0.4],            #5
-           [0.8, 0.0, 0.0, 1, 0.8, 0.0, 0.0, 0.0, True, False, False, True, 5.0],             #6
-           [0.4, 0.0, 0.0, 1, 0.8, 0.0, 0.0, 0.0, True, False, True, True, 1.0],              #7
-           [0.8, 0.0, 0.0, 1, 0.0, 0.0, 0.0, 0.0, True, False, True, True, 0.3],              #8
-           [0.8, 0.0, 0.0, 1, 0.8, 0.0, 0.0, 0.0, True, True, True, True, 1.0],               #9
-           [0.8, 0.8, 0.0, 1, 0.8, 0.0, 0.0, 0.0, True, True, True, True, 0.3],              #10
-           [0.8, 0.0, 0.0, 1, 0.8, 0.0, 0.0, 0.0, False, True, True, False, 0.4]]             #11
+ptrn_v3_1 = [
+    [0.00, 0.56, 0.99, 0.00, 0.00, 0.71, 0.0, 0.0, False, True, True, False, 5.0],  #0
+    [0.00, 0.56, 0.99, 0.00, 0.00, 0.71, 0.0, 0.0, False, True, True, True, 1.0],   #1
+    [0.00, 0.40, 0.99, 0.00, 0.00, 0.00, 0.0, 0.0, False, True, True, True, 0.3],   #2  
+    [0.00, 0.56, 0.99, 0.00, 0.00, 0.71, 0.0, 0.0, True, True, True, True, 1.0],    #3
+    [0.63, 0.56, 0.99, 0.00, 0.00, 0.71, 0.0, 0.0, True, True, True, True, 0.3],    #4
+    [0.00, 0.56, 0.99, 0.00, 0.00, 0.71, 0.0, 0.0, True, False, False, True, 0.4],  #5
+    [0.63, 0.00, 0.00, 0.99, 0.71, 0.00, 0.0, 0.0, True, False, False, True, 5.0],  #6
+    [0.40, 0.00, 0.00, 0.99, 0.71, 0.00, 0.0, 0.0, True, False, True, True, 1.0],   #7
+    [0.63, 0.00, 0.00, 0.99, 0.00, 0.00, 0.0, 0.0, True, False, True, True, 0.3],   #8
+    [0.63, 0.00, 0.00, 0.99, 0.71, 0.00, 0.0, 0.0, True, True, True, True, 1.0],    #9
+    [0.63, 0.56, 0.00, 0.99, 0.71, 0.00, 0.0, 0.0, True, True, True, True, 0.3],    #10
+    [0.63, 0.00, 0.00, 0.99, 0.71, 0.00, 0.0, 0.0, False, True, True, False, 0.4]   #11
+    ]
            
+wip = [
+    [0.0, 0.7, 1, 0, 0, 0, 0, 0, True, False, False, True, 2.0],
+    [0.0 ,0.7, 1, 0, 0, 0, 0, 0, True, False, False, True, 2.0]
+    ]
          
 
 
@@ -187,7 +193,7 @@ PATTERN = [[0.0, 0.8, 1, 0.0, 0.0, 0.8, 0.0, 0.0, False, True, True, False, 5.0]
 # MAX_PRESSURE = 0.85      # [bar] v2.4
 
 MAX_PRESSURE = ptrn_v3_pres
-DEFAULT_PATTERN = PATTERN      # default pattern
+DEFAULT_PATTERN = ptrn_v3_1      # default pattern
 
 MAX_CTROUT = 0.50     # [10V]
 TSAMPLING = 0.001     # [sec]
