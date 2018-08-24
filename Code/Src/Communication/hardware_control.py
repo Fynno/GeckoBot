@@ -218,7 +218,7 @@ class HUIThread(threading.Thread):
                 print('delta:', delta)
 
                 if idx == 0:
-                    self.take_snapshot()
+                    self.take_snapshot(delta)
 
                 if delta < 30 and idx in [1,3,7,9]:
                     self.ptrn_idx += 1
@@ -248,7 +248,7 @@ class HUIThread(threading.Thread):
 
         safety = np.dot(startvec,endvec)/(LA.norm(startvec)*LA.norm(endvec))
         if safety <= 1 and safety >= -1:
-	    difangle = IMUcalc.calc_angle(startvec, endvec)
+            difangle = IMUcalc.calc_angle(startvec, endvec)
             difangle2 = math.acos(safety)*57.2958
 		
             if abs(difangle) > (12):
@@ -294,8 +294,8 @@ class HUIThread(threading.Thread):
         self.state = new_state if change else self.state
         return (self.state, change)
 
-    def take_snapshot(self):
-        self.picam.make_image('fynn/img_{}_{}.jpg'.format(str(self.img_idx).zfill(3), self.ptrn_idx))
+    def take_snapshot(self, delta):
+        self.picam.make_image('fynn/img_{}_{}_{}.jpg'.format(str(self.img_idx).zfill(3), self.ptrn_idx, delta))
         self.img_idx += 1
 
     def set_leds(self):
