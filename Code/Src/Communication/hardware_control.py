@@ -16,6 +16,7 @@ import Adafruit_BBIO.ADC as ADC
 import math
 import numpy as np
 from numpy import linalg as LA
+import datetime
 
 from termcolor import colored
 from Src.Management import reference as ref
@@ -295,7 +296,7 @@ class HUIThread(threading.Thread):
         return (self.state, change)
 
     def take_snapshot(self, delta):
-        self.picam.make_image('fynn/img_{}_{}_{}.jpg'.format(str(self.img_idx).zfill(3), time.time(), delta))
+        self.picam.make_image('fynn/img_{}_{}_{}.jpg'.format(datetime.datetime.now().strftime("%M-%S"),str(self.img_idx).zfill(3), delta))
         self.img_idx += 1
 
     def set_leds(self):
