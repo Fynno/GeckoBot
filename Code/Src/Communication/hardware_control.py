@@ -20,6 +20,7 @@ from numpy import linalg as LA
 from termcolor import colored
 from Src.Management import reference as ref
 from Src.Math import IMUcalc
+from Src.Visual.PiCamera import client
 
 TSamplingUI = .1
 p7_ptrn = 0.0
@@ -85,6 +86,9 @@ class HUIThread(threading.Thread):
         self.process_time = 0
         self.state = cargo.state
         self.startvec = []
+
+        self.picam = client.ClientSocket()
+        self.img_idx = 0
 
         self.rootLogger.info('Initialize HUI Thread ...')
         ADC.setup()
@@ -217,6 +221,7 @@ class HUIThread(threading.Thread):
                     self.rootLogger.info('Test not necessary. Continue walking') 
                 elif idx == 1:
                     self.startvec = self.cargo.rec_IMU["5"]
+                    self.take_snapshot()
                 elif idx ==3:
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==7:
@@ -285,6 +290,10 @@ class HUIThread(threading.Thread):
                     time.sleep(.05)
         self.state = new_state if change else self.state
         return (self.state, change)
+
+    def take_snapshot(self):
+        self.picam.make_image('fynn/img_{}_{}.jpg'.format(str(self.img_idx).zfill(3), self.ptrn_idx))
+        self.img_idx += 1
 
     def set_leds(self):
         my_state = self.state
