@@ -295,7 +295,7 @@ class HUIThread(threading.Thread):
         return (self.state, change)
 
     def take_snapshot(self, delta):
-        self.picam.make_image('fynn/img_{}_{}_{}.jpg'.format(str(self.img_idx).zfill(3), self.ptrn_idx, delta))
+        self.picam.make_image('fynn/img_{}_{}_{}.jpg'.format(str(self.img_idx).zfill(3), time.time(), delta))
         self.img_idx += 1
 
     def set_leds(self):
