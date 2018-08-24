@@ -217,7 +217,7 @@ class HUIThread(threading.Thread):
                 delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["5"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["5"])))*57.2958    
                 print('delta:', delta)
 
-                if idx == 1:
+                if idx == 0:
                     self.take_snapshot()
 
                 if delta < 30 and idx in [1,3,7,9]:
