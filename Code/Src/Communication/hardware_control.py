@@ -216,12 +216,15 @@ class HUIThread(threading.Thread):
                 g = [0,0,1];                                                                                  
                 delta = 90 - math.asin((np.dot(self.cargo.rec_IMU["5"],g))/(LA.norm(g)*LA.norm(self.cargo.rec_IMU["5"])))*57.2958    
                 print('delta:', delta)
+
+                if idx == 1:
+                    self.take_snapshot()
+
                 if delta < 30 and idx in [1,3,7,9]:
                     self.ptrn_idx += 1
                     self.rootLogger.info('Test not necessary. Continue walking') 
                 elif idx == 1:
                     self.startvec = self.cargo.rec_IMU["5"]
-                    self.take_snapshot()
                 elif idx ==3:
                     self.startvec = self.cargo.rec_IMU["0"]
                 elif idx ==7:
