@@ -252,7 +252,7 @@ class HUIThread(threading.Thread):
             difangle = IMUcalc.calc_angle(startvec, endvec)
             difangle2 = math.acos(safety)*57.2958
 		
-            if abs(difangle) > (12):
+            if abs(difangle) > (4):
                 self.rootLogger.info('Unfixed foot identified')
 		self.ptrn_idx -=2
             else:
